@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prince - Unity Developer Portfolio</title>
+    <style>
+        :root {
+            --primary: #2a2f4f;
+            --secondary: #917fb3;
+            --accent: #e5beec;
+            --light: #fde2f3;
+            --dark: #1a1a2e;
+            --text: #333;
+            --text-light: #777;
+            --white: #fff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Section */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: var(--white);
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="none" width="100" height="100"/><path fill="rgba(255,255,255,0.05)" d="M30 20 L70 20 L70 80 L30 80 Z"/></svg>') repeat;
+            opacity: 0.1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .profile-pic {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 20px;
+            object-fit: cover;
+            background-color: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            overflow: hidden;
+            font-size: 4rem;
+            color: var(--white);
+        }
+
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .name {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .contact-info a {
+            color: var(--light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: var(--accent);
+        }
+
+        .contact-info i {
+            font-size: 1.2rem;
+        }
+
+        /* About Section */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            position: relative;
+            color: var(--primary);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+
+        .about-content {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .skills-container {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .skill-category {
+            margin-bottom: 30px;
+        }
+
+        .skill-category h3 {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--accent);
+            padding-bottom: 5px;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-item {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-block;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-img {
+            height: 200px;
+            background-color: var(--secondary);
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-type {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            z-index: 1;
+        }
+
+        .project-details {
+            padding: 20px;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .project-desc {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .tech-tag {
+            background-color: var(--light);
+            color: var(--primary);
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        /* Experience Section */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background-color: var(--secondary);
+        }
+
+        .timeline-item {
+            padding: 20px 30px;
+            position: relative;
+            background-color: var(--white);
+            border-radius: 6px;
+            width: calc(50% - 40px);
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background-color: var(--white);
+            border: 4px solid var(--secondary);
+            border-radius: 50%;
+        }
+
+        .timeline-item:nth-child(odd)::before {
+            right: -50px;
+        }
+
+        .timeline-item:nth-child(even)::before {
+            left: -50px;
+        }
+
+        .timeline-date {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .timeline-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .timeline-company {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        /* Education & Certificates */
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .card {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            min-width: 280px;
+            max-width: 380px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card i {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .card-subtitle {
+            font-size: 1rem;
+            color: var(--secondary);
+            margin-bottom: 5px;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-top: auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            color: var(--white);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                width: calc(100% - 60px);
+                padding-left: 45px;
+                padding-right: 15px;
+            }
+
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+
+            .timeline-item:nth-child(odd)::before,
+            .timeline-item:nth-child(even)::before {
+                left: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .name {
+                font-size: 2.5rem;
+            }
+
+            .title {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .name {
+                font-size: 2rem;
+            }
+
+            .profile-pic {
+                width: 150px;
+                height: 150px;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .timeline-item {
+                padding: 15px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="profile-pic">
+                    <span>P</span>
+                </div>
+                <h1 class="name">Prince</h1>
+                <h2 class="title">Unity Developer</h2>
+                <div class="contact-info">
+                    <a href="tel:+919528190181"><i class="fas fa-phone"></i> +91 9528190181</a>
+                    <a href="mailto:probot9.09@gmail.com"><i class="fas fa-envelope"></i> probot9.09@gmail.com</a>
+                    <a href="https://github.com" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>I am a skilled Unity Developer with experience in creating games, AR applications, and
+                        interactive experiences. With a strong foundation in C# programming and game development
+                        patterns, I specialize in creating optimized, engaging, and visually appealing applications.</p>
+                    <p>My expertise includes UI handling, API integration, shader development, VFX, and game
+                        optimization. I also have experience with AR development using various SDKs including Lightship,
+                        ARKit, and AR Foundation.</p>
+                    <p>With a B.Tech in Computer Science Engineering and industry certifications in Unity development, I
+                        bring both technical knowledge and creative problem-solving to every project.</p>
+                </div>
+                <div class="skills-container">
+                    <div class="skill-category">
+                        <h3>Programming Languages</h3>
+                        <div class="skill-list">
+                            <span class="skill-item">C# (Intermediate)</span>
+                            <span class="skill-item">C++ (Beginner)</span>
+                            <span class="skill-item">Python (Basic)</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Game Engines</h3>
+                        <div class="skill-list">
+                            <span class="skill-item">Unity</span>
+                            <span class="skill-item">Unreal (5.2.1)</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Design Patterns</h3>
+                        <div class="skill-list">
+                            <span class="skill-item">Singleton</span>
+                            <span class="skill-item">Observer</span>
+                            <span class="skill-item">Command</span>
+                            <span class="skill-item">Object Pattern</span>
+                            <span class="skill-item">StateMachine</span>
+                            <span class="skill-item">Service Locator</span>
+                            <span class="skill-item">DI</span>
+                            <span class="skill-item">MVC</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>SDKs & Unity Technologies</h3>
+                        <div class="skill-list">
+                            <span class="skill-item">Lightship</span>
+                            <span class="skill-item">ARKit</span>
+                            <span class="skill-item">AR Foundation</span>
+                            <span class="skill-item">Vuforia</span>
+                            <span class="skill-item">Unity DOTS</span>
+                            <span class="skill-item">Unity Addressable</span>
+                            <span class="skill-item">Firebase SDK</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section" id="projects" style="background-color: #f0f0f0;">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div class="project-img" style="background-color: #2a7fff;">
+                        <div class="project-type">Healthcare</div>
+                    </div>
+                    <div class="project-details">
+                        <h3 class="project-title">TS Scanning Ortho</h3>
+                        <p class="project-desc">A healthcare scanning application with advanced mesh processing
+                            capabilities for orthopedic applications.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Mesh Processing</span>
+                            <span class="tech-tag">API Integration</span>
+                            <span class="tech-tag">UI Development</span>
+                            <span class="tech-tag">Backend Processing</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <div class="project-img" style="background-color: #ff6b4a;">
+                        <div class="project-type">Game</div>
+                    </div>
+                    <div class="project-details">
+                        <h3 class="project-title">SuperOne</h3>
+                        <p class="project-desc">A feature-rich game with complex UI, animations, and integrated
+                            monetization systems.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">UI Development</span>
+                            <span class="tech-tag">Animation</span>
+                            <span class="tech-tag">Web Socket</span>
+                            <span class="tech-tag">IAP</span>
+                            <span class="tech-tag">Optimization</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <div class="project-img" style="background-color: #42b883;">
+                        <div class="project-type">Educational</div>
+                    </div>
+                    <div class="project-details">
+                        <h3 class="project-title">LetterAlong</h3>
+                        <p class="project-desc">Multi-language educational game focused on learning through interactive
+                            gameplay.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">UI Development</span>
+                            <span class="tech-tag">Animation</span>
+                            <span class="tech-tag">Shaders</span>
+                            <span class="tech-tag">VFX</span>
+                            <span class="tech-tag">Localization</span>
+                            <span class="tech-tag">IAP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card">
+                    <div class="project-img" style="background-color: #8e44ad;">
+                        <div class="project-type">VR</div>
+                    </div>
+                    <div class="project-details">
+                        <h3 class="project-title">W3villaVR</h3>
+                        <p class="project-desc">Immersive 3D VR experience with advanced lighting and player controls.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">VR Development</span>
+                            <span class="tech-tag">Shaders</span>
+                            <span class="tech-tag">VFX</span>
+                            <span class="tech-tag">Level Design</span>
+                            <span class="tech-tag">Lighting</span>
+                            <span class="tech-tag">Unity ProBuilder</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card">
+                    <div class="project-img" style="background-color: #e74c3c;">
+                        <div class="project-type">Hyper Casual</div>
+                    </div>
+                    <div class="project-details">
+                        <h3 class="project-title">Equation Escape</h3>
+                        <p class="project-desc">Mathematics-based hyper casual game with engaging gameplay and
+                            monetization.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Game Design</span>
+                            <span class="tech-tag">Level Design</span>
+                            <span class="tech-tag">Iron Source</span>
+                            <span class="tech-tag">Mathematics Integration</span>
+                            <span class="tech-tag">Cross-platform</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="project-card">
+                    <div class="project-img" style="background-color: #3498db;">
+                        <div class="project-type">Portfolio</div>
+                    </div>
+                    <div class="project-details">
+                        <h3 class="project-title">Other Projects</h3>
+                        <p class="project-desc">Collection of development projects including MOJOBall, CityWay,
+                            SuperMiroBrosUnity, and more.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Game Development</span>
+                            <span class="tech-tag">Unity</span>
+                            <span class="tech-tag">C#</span>
+                            <span class="tech-tag">Game Design</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="section" id="experience">
+        <div class="container">
+            <h2 class="section-title">Work Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">September 2022 - Present</div>
+                    <h3 class="timeline-title">Unity Developer</h3>
+                    <div class="timeline-company">W3 Villa Pvt. LTD., Noida</div>
+                    <p>Working on diverse projects including healthcare applications, games, educational software, and
+                        VR experiences. Responsible for UI development, API integration, animations, shader programming,
+                        and game optimization.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">January 2020 - March 2020</div>
+                    <h3 class="timeline-title">C/C++ Training</h3>
+                    <div class="timeline-company">Netwings Infotech Private Ltd, Noida</div>
+                    <p>Completed training in C++ fundamentals, data structures, and STL library implementation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education & Certificates Section -->
+    <section class="section" id="education" style="background-color: #f0f0f0;">
+        <div class="container">
+            <h2 class="section-title">Education & Certifications</h2>
+            <div class="cards-container">
+                <!-- Education Cards -->
+                <div class="card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3 class="card-title">B.Tech in Computer Science Engineering</h3>
+                    <div class="card-subtitle">2019 - 2023</div>
+                    <p class="card-desc">CGPA: 8.5</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-school"></i>
+                    <h3 class="card-title">Intermediate</h3>
+                    <div class="card-subtitle">Uttar Pradesh State Board</div>
+                    <p class="card-desc">Score: 85%</p>
+                </div>
+
+                <!-- Certification Cards -->
+                <div class="card">
+                    <i class="fas fa-certificate"></i>
+                    <h3 class="card-title">Unity Mobile AR Development</h3>
+                    <div class="card-subtitle">Unity Technologies</div>
+                    <p class="card-desc">Specialized certification in mobile augmented reality application development.
+                    </p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-certificate"></i>
+                    <h3 class="card-title">Unity Junior Programmer</h3>
+                    <div class="card-subtitle">Unity Technologies</div>
+                    <p class="card-desc">Certification demonstrating proficiency in Unity programming fundamentals.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-certificate"></i>
+                    <h3 class="card-title">Unity Creative Core</h3>
+                    <div class="card-subtitle">Unity Technologies</div>
+                    <p class="card-desc">Certification in creative aspects of Unity development.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://itch.io" target="_blank"><i class="fab fa-itch-io"></i></a>
+            </div>
+            <p>&copy; 2025 Prince. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple script to handle smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
